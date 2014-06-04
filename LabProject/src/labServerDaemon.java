@@ -1,7 +1,8 @@
+package serverTest;
 import java.net.*;
 import java.io.*;
 
-
+//Receives data
 public class labServerDaemon extends Thread {
 	public labServerDaemon() {
 		start();

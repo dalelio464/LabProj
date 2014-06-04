@@ -1,3 +1,6 @@
+package serverTest;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Date;
@@ -11,8 +14,12 @@ public class ClientHandler extends Thread {
 	}
 	public void run() {
 		try {
-			PrintStream clientOutput = new PrintStream(socketAccept.getOutputStream(), true);
-			clientOutput.println(new Date());
+			byte[] dataStream = null;
+			InputStream input = socketAccept.getInputStream();
+			while(!this.socketAccept.isClosed()) {
+				input.read(dataStream);
+				System.out.println(new String(dataStream));
+			}
 			socketAccept.close();
 		}
 		catch (Exception e) {
